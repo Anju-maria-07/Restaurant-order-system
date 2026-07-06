@@ -1,0 +1,27 @@
+def display_food_menu():
+    print('===FOOD MENU===')
+
+    print('MAIN COURSE:')
+    print('1. Chicken Biriyani         Rs. 180 ')
+    print('2. Mutton Biriyani          Rs. 200 ')
+    print('3. Veg Biriyani             Rs. 150 ')
+    print('4. Chicken Fried Rice       Rs. 160 ')
+    print('5. Veg Fried Rice           Rs. 140 ')
+    print('6. Chicken Noodles          Rs. 170 ')
+    print('7. Veg Noodles              Rs. 150 ')
+    print('8. Chicken Manchurian       Rs. 180 ') 
+
+    print('===OUR SPECIALS===')
+    print('9. pizza                    Rs. 250 ')
+    print('10. burger                  Rs. 150 ')
+    print('11. pasta                   Rs. 190 ')
+    print('12. sandwich                Rs. 120 ')
+    print('13. french fries            Rs. 100 ')
+    print('14. coke                    Rs. 50 ')
+    print('')
+    print('===OUR BEVERAGES===')
+    print('15. coffee                   Rs. 25 ')
+    print('16. tea                      Rs. 20 ')
+    print('17. Fresh lime juice         Rs. 30 ')
+    print('18. cold coffee              Rs. 80 ')
+    
