@@ -46,7 +46,10 @@ def view_current_order(orders):
     else:
         for i in range(len(orders)):
             print(i+1,'. table no:',orders[i]['table_no'])
-            print('. item no:',orders[i]['item_no'],'  x',orders[i]['quantity'])
+            for item in orders[i]['items']:
+                print(item['item_no'], '     x ',item['quantity'])
+
+            print('-----------------------------')
 
 def add_item(orders):
     if len(orders)==0:
@@ -67,3 +70,4 @@ if __name__=='__main__':
     orders=[]
     new_order(orders)
     print(orders)
+    view_current_order(orders)
