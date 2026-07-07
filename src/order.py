@@ -1,5 +1,7 @@
+from menu import MENU_ITEMS
+
 def new_order(orders):
-    table_no=int(input('enter the table no: '))
+    table_no = int(input('enter the table no: '))
     item_list=[]
 
     while True:
@@ -11,14 +13,17 @@ def new_order(orders):
         if choice==1:
 
             item_no =int(input('enter the item no: '))
-            quantity = int(input('enter the quantity: '))
+            if item_no in MENU_ITEMS:
 
-            item_dic={
-            'item_no':item_no ,
-            'quantity': quantity
-            }
-            item_list.append(item_dic)
+                quantity = int(input('enter the quantity: '))
 
+                item_dic={
+                'item_no':item_no ,
+                'quantity': quantity
+                }
+                item_list.append(item_dic)
+            else:
+                print('invalid item no!!. please select the ryt item number.')
 
 
         elif choice==2:
@@ -41,29 +46,40 @@ def new_order(orders):
             print('invalid choice!!')
 
 def view_current_order(orders):
-    if len(orders)==0:
+    if len(orders) == 0:
         print('no orders yet!!')
     else:
         for i in range(len(orders)):
             print(i+1,'. table no:',orders[i]['table_no'])
             for item in orders[i]['items']:
-                print(item['item_no'], '     x ',item['quantity'])
+                item_no_selected= item['item_no']
+                item_name= MENU_ITEMS[item_no_selected]['item_name']
+                print ( f" {item_name :<25} x {item['quantity']}")
 
             print('-----------------------------')
 
 def add_item(orders):
-    if len(orders)==0:
+    if len(orders) == 0:
         print('no oders yet')
 
     else:
         table_no=int(input('enter the table number: '))
         for order in orders:
-            if order['table_no']==table_no:
-                item=int(input('enter the item to be added: '))
-                quantity=int(input('enter the quantity of item: '))
+            if order['table_no'] == table_no:
+                item_no = int(input('enter the item number to be added: '))
+                if item_no in MENU_ITEMS:
 
-                order['item_no']=item
-                order['quantity']=quantity
+                    quantity = int(input('enter the quantity of item: '))
+
+                    item_dic = {
+                            'item_no': item_no,
+                            'quantity': quantity
+                        }
+                    order['items'].append(item_dic)
+
+                else:
+                    print('invalid item no!!!')
+                    
 
 
 if __name__=='__main__':
@@ -71,3 +87,4 @@ if __name__=='__main__':
     new_order(orders)
     print(orders)
     view_current_order(orders)
+    add_item(orders)
