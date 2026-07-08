@@ -17,11 +17,19 @@ def new_order(orders):
 
                 quantity = int(input('enter the quantity: '))
 
-                item_dic={
-                'item_no':item_no ,
-                'quantity': quantity
-                }
-                item_list.append(item_dic)
+                found = False
+                
+                for item in item_list:
+                    if item['item_no'] == item_no:
+                        found = True
+                        item['quantity'] += quantity
+
+                if found == False:
+                    item_dic={
+                        'item_no':item_no ,
+                        'quantity': quantity
+                    }
+                    item_list.append(item_dic)
             else:
                 print('invalid item no!!. please select the ryt item number.')
 
@@ -64,27 +72,80 @@ def add_item(orders):
 
     else:
         table_no=int(input('enter the table number: '))
+        found_table =False
         for order in orders:
             if order['table_no'] == table_no:
+                found_table = True
+
                 item_no = int(input('enter the item number to be added: '))
                 if item_no in MENU_ITEMS:
-
                     quantity = int(input('enter the quantity of item: '))
 
-                    item_dic = {
-                            'item_no': item_no,
-                            'quantity': quantity
-                        }
-                    order['items'].append(item_dic)
+                    found = False
+                    for item in order['items']:
+                        if item['item_no'] == item_no:
+                            found = True
+
+                            item['quantity']+= quantity
+
+                    if found == False:
+
+                        item_dic = {
+                                'item_no': item_no,
+                                'quantity': quantity
+                            }
+                        order['items'].append(item_dic)
+
 
                 else:
                     print('invalid item no!!!')
-                    
 
+        if not found_table:
+            print('No order in that table !!')            
 
-if __name__=='__main__':
-    orders=[]
-    new_order(orders)
-    print(orders)
-    view_current_order(orders)
-    add_item(orders)
+def remove_item(orders):
+    if len(orders) == 0 :
+        print (' no orders yet!!')
+
+    else:
+        table_no_del =int(input('enter the table no of the item to be deleted: '))
+
+        found_table = False
+        for order in orders:
+            if order['table_no'] == table_no_del:
+                found_table = True
+
+                item_no_del = int(input('enter the item no to be deleted: '))
+                found_item = False
+
+                for item in order['items']:
+                    if item['item_no'] == item_no_del :
+                        found_item = True
+                        order['items'].remove(item)
+                        print(' successfully deleted item !!')
+                        break
+
+                if found_item == False:
+                    print('item no not found, item no: ',item_no_del , 'has never been ordered!!')
+        if found_table == False:
+            print('table no not found, no order in that table yet !!')
+
+def cancel_order(orders):
+    if len(orders) == 0:
+        print('No orders yet !!')
+
+    else:
+        table_no_cancel = int(input('enter the table no to cancel order: '))
+        found = False
+
+        for order in orders:
+            if order['table_no'] == table_no_cancel:
+                found = True
+                orders.remove(order)
+                print('Successfully cancelled order !!!')
+                break
+
+        if not found:
+            print('there isno order for table no: ', table_no_cancel )
+
+    

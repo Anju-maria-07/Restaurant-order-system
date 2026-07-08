@@ -79,6 +79,3 @@ def display_food_menu():
     for item_no,item in MENU_ITEMS.items():
         print(f"{item_no:<3}. {item['item_name']:<25} Rs.{item['price']}")
 
-if __name__  == '__main__':
-
-    display_food_menu()
