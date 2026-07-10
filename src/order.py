@@ -1,7 +1,12 @@
 from menu import MENU_ITEMS
 
 def new_order(orders):
-    table_no = int(input('enter the table no: '))
+    try:
+        table_no = int(input('enter the table no: '))
+    except ValueError:
+        print('Invalid table no!!. Please enter a whole number!!')
+        return
+
     item_list=[]
 
     while True:
@@ -9,13 +14,27 @@ def new_order(orders):
         print('2. save and finish order')
         print('3. cancel order')
 
-        choice=int(input('enter your choice (eg.1,2...): '))
+        try:
+            choice=int(input('enter your choice (eg.1,2...): '))
+        except ValueError:
+            print('Invalid choice. please enter a whole number (1,2,3...)')
+            continue
+
         if choice==1:
 
-            item_no =int(input('enter the item no: '))
+            try:
+                item_no =int(input('enter the item no: '))
+
+            except ValueError:
+                print('invalid item no!!. Please enter a whole number (eg.1,2,3...)')
+                continue
             if item_no in MENU_ITEMS:
 
-                quantity = int(input('enter the quantity: '))
+                try:
+                    quantity = int(input('enter the quantity: '))
+                except ValueError:
+                    print('Invalid quantity!!. Enter a whole number!!')
+                    continue
 
                 found = False
                 
@@ -71,15 +90,27 @@ def add_item(orders):
         print('no oders yet')
 
     else:
-        table_no=int(input('enter the table number: '))
+        try:
+            table_no=int(input('enter the table number: '))
+        except ValueError:
+            print('Invalid table no. Please enter a whole number,')
+            return
         found_table =False
         for order in orders:
             if order['table_no'] == table_no:
                 found_table = True
 
-                item_no = int(input('enter the item number to be added: '))
+                try:
+                    item_no = int(input('enter the item number to be added: '))
+                except ValueError:
+                    print('Invalid item no!!. Please enter a whole number (eg.1,2,3...)')
+                    continue
                 if item_no in MENU_ITEMS:
-                    quantity = int(input('enter the quantity of item: '))
+                    try:
+                        quantity = int(input('enter the quantity of item: '))
+                    except ValueError:
+                        print('Invalid quantity!!. Please enter a whole number!!')
+                        continue
 
                     found = False
                     for item in order['items']:
@@ -108,14 +139,22 @@ def remove_item(orders):
         print (' no orders yet!!')
 
     else:
-        table_no_del =int(input('enter the table no of the item to be deleted: '))
+        try:
+            table_no_del =int(input('enter the table no of the item to be deleted: '))
+        except ValueError:
+            print('Invalid table no!!. Please enter a whole number!!')
+            return
 
         found_table = False
         for order in orders:
             if order['table_no'] == table_no_del:
                 found_table = True
 
-                item_no_del = int(input('enter the item no to be deleted: '))
+                try:
+                    item_no_del = int(input('enter the item no to be deleted: '))
+                except ValueError:
+                    print('Invalid item no!!. Please enter a whole number!!')
+                    continue
                 found_item = False
 
                 for item in order['items']:
@@ -135,7 +174,11 @@ def cancel_order(orders):
         print('No orders yet !!')
 
     else:
-        table_no_cancel = int(input('enter the table no to cancel order: '))
+        try:
+            table_no_cancel = int(input('enter the table no to cancel order: '))
+        except ValueError:
+            print('Invalid table no!!. Please enter a whole number!!')
+            return
         found = False
 
         for order in orders:

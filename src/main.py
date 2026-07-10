@@ -16,7 +16,11 @@ def main():
         print('6. Generate bill')
         print('7.Exit')
 
-        choice=int(input('enter your choice: '))
+        try:
+            choice=int(input('enter your choice: '))
+        except ValueError:
+            print("Invalid choice. Please enter a whole number between 1 and 7.")
+            continue
 
         if choice==1:    #new order
             display_food_menu()
