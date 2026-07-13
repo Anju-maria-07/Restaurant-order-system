@@ -1,4 +1,5 @@
 from menu import MENU_ITEMS
+from storage import save_orders
 
 def generate_bill(orders):
     if len(orders) == 0:
@@ -14,8 +15,9 @@ def generate_bill(orders):
         for order in orders:
             if order['table_no'] == table_no_bill:
                 found_table = True
+                print('===================================')
                 print('==========Restaurant Name==========')
-                print('===============Bill===============')
+                print('===============Bill================')
                 print('')
                 print('Table No: ',table_no_bill)
                 print(f" {'item':<25} {'Qty':<5} {'Amount':<10}")
@@ -37,6 +39,7 @@ def generate_bill(orders):
 
 
                 orders.remove(order)
+                save_orders(orders)   # file handiling
                 break
 
         if not found_table:

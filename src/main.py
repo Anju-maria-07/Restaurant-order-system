@@ -1,9 +1,10 @@
 from menu import display_food_menu
 import order
 from bill import generate_bill
+import storage
 
 def main():
-    orders=[]
+    orders=storage.load_orders()         # file handiling
 
     while True:
         print('====================RESTAURANT ORDER SYSTEM====================')

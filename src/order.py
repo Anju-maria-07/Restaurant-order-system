@@ -1,4 +1,5 @@
 from menu import MENU_ITEMS
+from storage import save_orders
 
 def new_order(orders):
     try:
@@ -49,6 +50,7 @@ def new_order(orders):
                         'quantity': quantity
                     }
                     item_list.append(item_dic)
+            
             else:
                 print('invalid item no!!. please select the ryt item number.')
 
@@ -64,6 +66,7 @@ def new_order(orders):
                 'items': item_list
                }
                 orders.append(order)
+                save_orders(orders)        # file handiling
                 break
 
         elif choice==3:
@@ -118,6 +121,7 @@ def add_item(orders):
                             found = True
 
                             item['quantity']+= quantity
+                                                    # need file handiling
 
                     if found == False:
 
@@ -126,6 +130,8 @@ def add_item(orders):
                                 'quantity': quantity
                             }
                         order['items'].append(item_dic)
+
+                    save_orders(orders) # file handling instead of saving in two place we can do it in one place.
 
 
                 else:
@@ -161,6 +167,7 @@ def remove_item(orders):
                     if item['item_no'] == item_no_del :
                         found_item = True
                         order['items'].remove(item)
+                        save_orders(orders)         # file handiling
                         print(' successfully deleted item !!')
                         break
 
@@ -185,6 +192,7 @@ def cancel_order(orders):
             if order['table_no'] == table_no_cancel:
                 found = True
                 orders.remove(order)
+                save_orders(orders)     #file handiling
                 print('Successfully cancelled order !!!')
                 break
 
